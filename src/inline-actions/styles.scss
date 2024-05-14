@@ -5,7 +5,6 @@
 
 @use '../internal/styles/tokens' as awsui;
 @use '../internal/styles' as styles;
-@use './mixins' as mixins;
 
 .inline-actions {
   float: right;
@@ -17,6 +16,5 @@
   border-right-width: 0.1em;
   height: 80%;
   width: 3px;
-  background-color: red;
   margin-top: 0.2em;
 }

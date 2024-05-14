@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import SpaceBetween from '../space-between/internal';
 import Button from '../button/internal';
+import ButtonDropdown from '../button-dropdown/internal';
 import styles from './styles.css.js';
 import { InlineActionsProps, Feedback } from './interfaces';
 import CopyToClipboard from '../copy-to-clipboard';
@@ -13,9 +14,11 @@ export default function InternalInlineActions({
   textToCopy,
   hideCopyButton,
   hideFeedbackButtons,
+  actions,
 }: InlineActionsProps) {
   const [thumb, setThumbs] = useState<Feedback | undefined>(undefined);
   const disabled = false;
+  const _actions = actions ?? [];
   return (
     <div className={styles['inline-actions']}>
       <SpaceBetween direction="horizontal" size="xxs">
@@ -67,6 +70,31 @@ export default function InternalInlineActions({
           />
         ) : (
           <></>
+        )}
+        {_actions.slice(0, Math.min(_actions.length, 2)).map(a => {
+          return (
+            <Button
+              key={a.iconName}
+              variant="icon"
+              disabled={disabled}
+              iconName={a.iconName}
+              iconAlt={a.tooltip}
+              iconSvg={a.iconSvg}
+              ariaLabel={a.tooltip}
+              onClick={a.onClick}
+            />
+          );
+        })}
+        {_actions.length > 2 && (
+          <ButtonDropdown
+            variant="icon"
+            disabled={disabled}
+            items={_actions
+              .slice(2, _actions.length)
+              .map(a => ({ iconSvg: a.iconSvg, iconName: a.iconName, text: a.text, id: a.text }))}
+            iconName="ellipsis"
+            onClick={() => {}}
+          />
         )}
       </SpaceBetween>
     </div>

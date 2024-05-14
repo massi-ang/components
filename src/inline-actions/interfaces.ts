@@ -2,8 +2,17 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { BaseComponentProps } from '../internal/base-component';
+import { IconProps } from '../icon/interfaces';
 
 export type Feedback = 'thumbs-up' | 'thumbs-down';
+
+export interface Action {
+  onClick?: () => void;
+  iconName?: IconProps.Name;
+  iconSvg?: React.ReactNode;
+  tooltip?: string;
+  text: string;
+}
 
 export interface InlineActionsProps extends BaseComponentProps {
   textToCopy?: string;
@@ -29,6 +38,8 @@ export interface InlineActionsProps extends BaseComponentProps {
   hideFeedbackButtons?: boolean;
 
   thumbsDownText?: string;
+
+  actions?: Action[];
 
   onFeedback?: (vote: Feedback) => void;
 }

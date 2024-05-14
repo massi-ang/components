@@ -12,6 +12,31 @@ export default function SimpleInlineActions() {
         <InlineActions thumbsDownText="Not useful" />
         <InlineActions hideCopyButton={true} />
         <InlineActions hideFeedbackButtons={true} />
+        <InlineActions
+          actions={[
+            { iconName: 'audio-full', text: 'Listen' },
+            { iconName: 'add-plus', text: 'Add' },
+            { iconName: 'angle-right', text: 'Down' },
+          ]}
+        />
+        <InlineActions
+          actions={[
+            { iconName: 'audio-full', text: 'Listen' },
+            { iconName: 'add-plus', text: 'Add' },
+            { iconName: 'angle-right', text: 'Down' },
+            { iconName: 'envelope', text: 'Email' },
+
+            { iconName: 'share', text: 'Share' },
+            { iconName: 'download', text: 'Download' },
+
+            { iconName: 'edit', text: 'Edit' },
+            { iconName: 'settings', text: 'Settings' },
+
+            { iconName: 'star', text: 'Star' },
+            { iconName: 'star-filled', text: 'Star filled' },
+            { iconName: 'star-half', text: 'Star half' },
+          ]}
+        />
       </SpaceBetween>
     </Container>
   );
