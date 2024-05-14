@@ -1,10 +1,11 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: Apache-2.0
-import React from 'react';
-import { Container, SpaceBetween } from '~components';
+import React, { useState } from 'react';
+import { Container, SpaceBetween, TextContent } from '~components';
 import InlineActions from '~components/inline-actions';
 
 export default function SimpleInlineActions() {
+  const [action, setAction] = useState('');
   return (
     <Container>
       <SpaceBetween direction="vertical" size="m">
@@ -14,9 +15,8 @@ export default function SimpleInlineActions() {
         <InlineActions hideFeedbackButtons={true} />
         <InlineActions
           actions={[
-            { iconName: 'audio-full', text: 'Listen' },
-            { iconName: 'add-plus', text: 'Add' },
-            { iconName: 'angle-right', text: 'Down' },
+            { iconName: 'audio-full', text: 'Listen', onClick: () => setAction('Listen') },
+            { iconName: 'add-plus', text: 'Add', onClick: () => setAction('Add') },
           ]}
         />
         <InlineActions
@@ -26,8 +26,8 @@ export default function SimpleInlineActions() {
             { iconName: 'angle-right', text: 'Down' },
             { iconName: 'envelope', text: 'Email' },
 
-            { iconName: 'share', text: 'Share' },
-            { iconName: 'download', text: 'Download' },
+            { iconName: 'share', text: 'Share', onClick: () => setAction('Share') },
+            { iconName: 'download', text: 'Download', onClick: () => setAction('Download') },
 
             { iconName: 'edit', text: 'Edit' },
             { iconName: 'settings', text: 'Settings' },
@@ -37,6 +37,7 @@ export default function SimpleInlineActions() {
             { iconName: 'star-half', text: 'Star half' },
           ]}
         />
+        <TextContent>{`You clicked: ${action}`}</TextContent>
       </SpaceBetween>
     </Container>
   );

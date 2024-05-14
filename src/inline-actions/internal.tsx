@@ -93,7 +93,12 @@ export default function InternalInlineActions({
               .slice(2, _actions.length)
               .map(a => ({ iconSvg: a.iconSvg, iconName: a.iconName, text: a.text, id: a.text }))}
             iconName="ellipsis"
-            onClick={() => {}}
+            onItemClick={e => {
+              const a = _actions.find(v => v.text === e.detail.id);
+              if (a && a.onClick) {
+                a.onClick(e);
+              }
+            }}
           />
         )}
       </SpaceBetween>

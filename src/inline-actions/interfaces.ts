@@ -3,11 +3,12 @@
 
 import { BaseComponentProps } from '../internal/base-component';
 import { IconProps } from '../icon/interfaces';
+import { CancelableEventHandler } from '../internal/events';
 
 export type Feedback = 'thumbs-up' | 'thumbs-down';
 
 export interface Action {
-  onClick?: () => void;
+  onClick?: CancelableEventHandler;
   iconName?: IconProps.Name;
   iconSvg?: React.ReactNode;
   tooltip?: string;
