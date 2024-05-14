@@ -1,0 +1,22 @@
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+
+@use '../internal/styles/tokens' as awsui;
+@use '../internal/styles' as styles;
+@use './mixins' as mixins;
+
+.inline-actions {
+  float: right;
+}
+
+.divider {
+  border-right-color: awsui.$color-text-interactive-default;
+  border-right-style: solid;
+  border-right-width: 0.1em;
+  height: 80%;
+  width: 3px;
+  background-color: red;
+  margin-top: 0.2em;
+}
