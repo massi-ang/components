@@ -4,6 +4,7 @@
 import { BaseComponentProps } from '../internal/base-component';
 import { IconProps } from '../icon/interfaces';
 import { CancelableEventHandler } from '../internal/events';
+import { InternalBaseComponentProps } from '../internal/hooks/use-base-component';
 
 export type Feedback = 'thumbs-up' | 'thumbs-down';
 
@@ -44,3 +45,5 @@ export interface InlineActionsProps extends BaseComponentProps {
 
   onFeedback?: (vote: Feedback) => void;
 }
+
+export interface InternalInlineActionsProps extends InlineActionsProps, InternalBaseComponentProps {}

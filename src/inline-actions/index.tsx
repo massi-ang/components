@@ -15,7 +15,7 @@ export { InlineActionsProps };
 export default function InlineActions(props: InlineActionsProps) {
   const baseComponentProps = useBaseComponent('InlineActions');
   const filteredProps = getExternalProps(props);
-  return <InternalInlineActions {...filteredProps} {...baseComponentProps} />;
+  return <InternalInlineActions {...baseComponentProps} {...filteredProps} />;
 }
 
 applyDisplayName(InlineActions, 'InlineActions');

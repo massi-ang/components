@@ -5,22 +5,29 @@ import SpaceBetween from '../space-between/internal';
 import Button from '../button/internal';
 import ButtonDropdown from '../button-dropdown/internal';
 import styles from './styles.css.js';
-import { InlineActionsProps, Feedback } from './interfaces';
-import CopyToClipboard from '../copy-to-clipboard';
+import { Feedback, InternalInlineActionsProps } from './interfaces';
+import CopyToClipboard from '../copy-to-clipboard/internal';
+import { getBaseProps } from '../internal/base-component';
 
 export default function InternalInlineActions({
   onFeedback,
   thumbsDownText,
   textToCopy,
+  copySuccessText,
+  copyErrorText,
+  copyButtonAriaLabel,
   hideCopyButton,
   hideFeedbackButtons,
   actions,
-}: InlineActionsProps) {
+  __internalRootRef = null,
+  ...restProps
+}: InternalInlineActionsProps) {
   const [thumb, setThumbs] = useState<Feedback | undefined>(undefined);
+  const baseProps = getBaseProps(restProps);
   const disabled = false;
   const _actions = actions ?? [];
   return (
-    <div className={styles['inline-actions']}>
+    <div ref={__internalRootRef} className={styles['inline-actions']} {...baseProps}>
       <SpaceBetween direction="horizontal" size="xxs">
         {!hideFeedbackButtons && (
           <>
@@ -55,17 +62,13 @@ export default function InternalInlineActions({
             )}
           </>
         )}
-        {!hideCopyButton && !hideFeedbackButtons && (
-          <div
-            //style={{ borderRightStyle: 'solid', borderRightWidth: '0.1em', height: '80%', marginTop: '0.2em' }}
-            className={styles.divider}
-          />
-        )}
+        {!hideCopyButton && !hideFeedbackButtons && <div className={styles.divider} />}
         {!hideCopyButton ? (
           <CopyToClipboard
             variant="icon"
-            copyErrorText=""
-            copySuccessText="Copied to clipboard"
+            copyErrorText={copyErrorText ?? ''}
+            copySuccessText={copySuccessText ?? ''}
+            copyButtonAriaLabel={copyButtonAriaLabel}
             textToCopy={textToCopy ?? ''}
           />
         ) : (
@@ -92,7 +95,7 @@ export default function InternalInlineActions({
             items={_actions
               .slice(2, _actions.length)
               .map(a => ({ iconSvg: a.iconSvg, iconName: a.iconName, text: a.text, id: a.text }))}
-            iconName="ellipsis"
+            mainAction={{ iconName: 'ellipsis', text: 'More' }}
             onItemClick={e => {
               const a = _actions.find(v => v.text === e.detail.id);
               if (a && a.onClick) {
